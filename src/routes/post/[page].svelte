@@ -1,7 +1,9 @@
 <script context="module" lang="ts">
   import { getPage, getPostStats, Post } from '$lib/api';
   import type { LoadInput } from '@sveltejs/kit';
-  import { onMount } from 'svelte';
+  export const prerender = true;
+  export const router = false;
+  export const hydrate = false;
 
   export async function load({ page, fetch }: LoadInput) {
     const pageNumber = parseInt(page.params.page);

@@ -2,6 +2,10 @@
   import { getPostStats } from '$lib/api';
   import type { LoadInput } from '@sveltejs/kit';
 
+  export const prerender = true;
+  export const router = false;
+  export const hydrate = false;
+
   export async function load({ fetch }: LoadInput) {
     const { maxPages } = await getPostStats(fetch);
     return {
