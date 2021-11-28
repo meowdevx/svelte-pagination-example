@@ -27,17 +27,9 @@ export async function getPostStats(fetch: Fetch): Promise<PostStats> {
 }
 
 export async function getPage(page: number, fetch: Fetch): Promise<Array<Post>> {
-	const posts = [];
+	const all: Array<Post> = await fetch('https://jsonplaceholder.typicode.com/posts').then((r) =>
+		r.json()
+	);
 	const start = (page - 1) * perPage + 1;
-	const url = `https://jsonplaceholder.typicode.com/posts/${start}`;
-	let post: Post = await fetch(url).then((r) => r.json());
-	let i = 0;
-	while (i < perPage && post.title != undefined) {
-		posts.push(post);
-		i += 1;
-		post = await fetch(`https://jsonplaceholder.typicode.com/posts/${start + i}`).then((r) =>
-			r.json()
-		);
-	}
-	return posts;
+	return all.slice(start, Math.min(start + perPage, all.length));
 }

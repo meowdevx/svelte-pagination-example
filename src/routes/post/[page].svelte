@@ -22,11 +22,8 @@
 	export let page: number;
 	export let posts: Array<Post>;
 
-	onMount(() => {
-		console.log({ maxPages, page, posts });
-	});
-	const hasPrev = page > 1;
-	const hasNext = page < maxPages;
+	$: hasPrev = page > 1;
+	$: hasNext = page < maxPages;
 </script>
 
 <h1>Page {page}</h1>
