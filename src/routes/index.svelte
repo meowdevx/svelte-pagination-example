@@ -1,19 +1,19 @@
 <script context="module" lang="ts">
   import { getPostStats } from '$lib/api';
-  import type { LoadInput } from '@sveltejs/kit';
+  import type { Load } from '@sveltejs/kit';
 
   export const prerender = true;
   export const router = false;
   export const hydrate = false;
 
-  export async function load({ fetch }: LoadInput) {
+  export const load: Load = async ({ fetch }) => {
     const { maxPages } = await getPostStats(fetch);
     return {
       props: {
         maxPages
       }
     };
-  }
+  };
 </script>
 
 <script lang="ts">
